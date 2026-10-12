@@ -1,0 +1,26 @@
+def mezcla(datos):
+    if len(datos) < 2:
+        return datos
+
+    m = len(datos) // 2
+    return unir(mezcla(datos[:m]), mezcla(datos[m:]))
+
+
+def unir(a, b):
+    res = []
+
+    while a and b:
+        res.append(a.pop(0) if a[0] <= b[0] else b.pop(0))
+
+    return res + a + b
+
+
+if __name__ == "__main__":
+    texto = input("Ingresa los números separados por espacios: ")
+    try:
+        nums = [int(t) for t in texto.split()]
+    except ValueError:
+        print("Solo se permiten números enteros.")
+    else:
+        print("Antes:  ", nums)
+        print("Después:", mezcla(nums))
